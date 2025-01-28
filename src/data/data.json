@@ -1,0 +1,85 @@
+{
+    "images": [
+      {
+        "id": "1",
+        "title": "Abstract Landscape",
+        "imageUrl": "/api/placeholder/400/300",
+        "generationDate": "2025-01-26T10:30:00Z",
+        "aiModel": "Stable Diffusion",
+        "tags": ["landscape", "abstract"]
+      },
+      {
+        "id": "2",
+        "title": "AI Portrait",
+        "imageUrl": "/api/placeholder/400/300",
+        "generationDate": "2025-01-25T14:20:00Z",
+        "aiModel": "DALL-E",
+        "tags": ["portrait", "realism"]
+      },
+      {
+        "id": "3",
+        "title": "Futuristic City",
+        "imageUrl": "/api/placeholder/500/350",
+        "generationDate": "2025-01-24T09:15:00Z",
+        "aiModel": "Midjourney",
+        "tags": ["cityscape", "futuristic"]
+      },
+      {
+        "id": "4",
+        "title": "Cyberpunk Alley",
+        "imageUrl": "/api/placeholder/600/400",
+        "generationDate": "2025-01-23T22:05:00Z",
+        "aiModel": "DeepAI",
+        "tags": ["cyberpunk", "night"]
+      },
+      {
+        "id": "5",
+        "title": "Dreamy Waterfall",
+        "imageUrl": "/api/placeholder/450/320",
+        "generationDate": "2025-01-22T18:40:00Z",
+        "aiModel": "Gemini",
+        "tags": ["nature", "waterfall"]
+      },
+      {
+        "id": "6",
+        "title": "Surreal Desert",
+        "imageUrl": "/api/placeholder/400/300",
+        "generationDate": "2025-01-21T15:10:00Z",
+        "aiModel": "Gemini",
+        "tags": ["desert", "surreal"]
+      },
+      {
+        "id": "7",
+        "title": "Neon Streets",
+        "imageUrl": "/api/placeholder/500/350",
+        "generationDate": "2025-01-20T12:30:00Z",
+        "aiModel": "Midjourney",
+        "tags": ["neon", "city"]
+      },
+      {
+        "id": "8",
+        "title": "Mystical Forest",
+        "imageUrl": "/api/placeholder/600/400",
+        "generationDate": "2025-01-19T08:55:00Z",
+        "aiModel": "DeepAI",
+        "tags": ["forest", "mystical"]
+      },
+      {
+        "id": "9",
+        "title": "Space Odyssey",
+        "imageUrl": "/api/placeholder/450/320",
+        "generationDate": "2025-01-18T21:45:00Z",
+        "aiModel": "Stable Diffusion",
+        "tags": ["space", "science fiction"]
+      },
+      {
+        "id": "10",
+        "title": "Sunset Over Ocean",
+        "imageUrl": "/api/placeholder/400/300",
+        "generationDate": "2025-01-17T17:20:00Z",
+        "aiModel": "DALL-E",
+        "tags": ["ocean", "sunset"]
+      }
+    ]
+  }
+  
