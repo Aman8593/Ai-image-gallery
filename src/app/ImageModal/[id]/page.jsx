@@ -7,7 +7,6 @@ import { format } from 'date-fns';
 
 const ImageModal = ({params}) => {
   
-  // const id = use(() => params?.id);
   const { id } = use(params);
 
   const item = sampleData.images.find((image) => image.id === id);
@@ -25,6 +24,7 @@ const ImageModal = ({params}) => {
   
 
   return (
+    
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70">
       <motion.div
         className="bg-white p-8 rounded-lg shadow-lg max-w-3xl w-full"

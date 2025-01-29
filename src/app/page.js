@@ -7,31 +7,34 @@ import { motion } from "framer-motion";
 const Home = () => {
   const [query, setQuery] = useState("");
   const [selectedModel, setSelectedModel] = useState("");
-  const [loading, setLoading] = useState(true);  // State for loading
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+
+  useEffect(() => {
+    setLoading(true);
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [query, selectedModel, currentPage]);
 
   // Filtering logic
   let filteredData = sampleData.images.filter((item) =>
     item.title.toLowerCase().includes(query.toLowerCase())
   );
 
-  // filtering based on ai model
   if (selectedModel) {
     filteredData = filteredData.filter((item) => item.aiModel === selectedModel);
   }
 
   const models = Array.from(new Set(sampleData.images.map((item) => item.aiModel)));
 
-  useEffect(() => {
-    setLoading(false);  // Set loading to false when data is ready
-  }, [filteredData]);
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="spinner"></div> {/* Customize spinner here */}
-      </div>
-    );
-  }
+  // Pagination logic
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+  const endIndex = currentPage * itemsPerPage;
+  const startIndex = endIndex - itemsPerPage;
+  const paginatedData = filteredData.slice(startIndex, endIndex);
 
   return (
     <div className="p-4 max-w-7xl mx-auto">
@@ -60,23 +63,50 @@ const Home = () => {
         </select>
       </div>
 
-      <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        {filteredData.map((item) => (
-          <Card
-          key={item.id}
-          id={item.id} // Pass the ID to the Card component
-          title={item.title}
-          date={new Date(item.generationDate).toLocaleString()}
-          model={item.aiModel}
-          image={item.imageUrl}
-        />
-        ))}
-      </motion.div>
+      {loading ? (
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="w-16 h-16 border-4 border-blue-400 border-dashed rounded-full animate-spin"></div>
+        </div>
+      ) : (
+        <>
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {paginatedData.map((item) => (
+              <Card
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                date={new Date(item.generationDate).toLocaleString()}
+                model={item.aiModel}
+                image={item.imageUrl}
+              />
+            ))}
+          </motion.div>
+
+          {/* Pagination */}
+          <div className="flex justify-center mt-6 space-x-2">
+            <button
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className="px-4 py-2 border rounded-lg bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+            >
+              Previous
+            </button>
+            <span className="px-4 py-2">Page {currentPage} of {totalPages}</span>
+            <button
+              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+              className="px-4 py-2 border rounded-lg bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+            >
+              Next
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 };
