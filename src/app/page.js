@@ -1,23 +1,37 @@
 "use client";
 import Card from "@/components/Card";
 import sampleData from "@/data/data.json";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const Home = () => {
   const [query, setQuery] = useState("");
   const [selectedModel, setSelectedModel] = useState("");
+  const [loading, setLoading] = useState(true);  // State for loading
 
   // Filtering logic
   let filteredData = sampleData.images.filter((item) =>
     item.title.toLowerCase().includes(query.toLowerCase())
   );
 
+  // filtering based on ai model
   if (selectedModel) {
     filteredData = filteredData.filter((item) => item.aiModel === selectedModel);
   }
 
   const models = Array.from(new Set(sampleData.images.map((item) => item.aiModel)));
+
+  useEffect(() => {
+    setLoading(false);  // Set loading to false when data is ready
+  }, [filteredData]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="spinner"></div> {/* Customize spinner here */}
+      </div>
+    );
+  }
 
   return (
     <div className="p-4 max-w-7xl mx-auto">
@@ -54,12 +68,13 @@ const Home = () => {
       >
         {filteredData.map((item) => (
           <Card
-            key={item.id}
-            title={item.title}
-            date={new Date(item.generationDate).toLocaleString()}
-            model={item.aiModel}
-            image={item.imageUrl}
-          />
+          key={item.id}
+          id={item.id} // Pass the ID to the Card component
+          title={item.title}
+          date={new Date(item.generationDate).toLocaleString()}
+          model={item.aiModel}
+          image={item.imageUrl}
+        />
         ))}
       </motion.div>
     </div>
