@@ -19,15 +19,16 @@ const Home = () => {
     return () => clearTimeout(timer);
   }, [query, selectedModel, currentPage]);
 
-  // Filtering logic
+  // Filtering on search
   let filteredData = sampleData.images.filter((item) =>
     item.title.toLowerCase().includes(query.toLowerCase())
   );
-
+ // filtering on models
   if (selectedModel) {
     filteredData = filteredData.filter((item) => item.aiModel === selectedModel);
   }
 
+  // unique list of AI models from sampleData.images
   const models = Array.from(new Set(sampleData.images.map((item) => item.aiModel)));
 
   // Pagination logic
